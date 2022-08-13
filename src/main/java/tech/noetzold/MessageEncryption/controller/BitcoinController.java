@@ -27,4 +27,20 @@ public class BitcoinController {
         for (byte i: arrayBytes) stringBuilder.append(Integer.toString((i & 0xff) + 0x100, 16).substring(1));
         return stringBuilder.toString();
     }
+
+    public StringBuilder mine(int blockNumber, String transaction, String previousHash) throws NoSuchAlgorithmException {
+        StringBuilder fin = new StringBuilder();
+        int nonce = 0;
+        for(int i = 0; i< 100; nonce++){
+            String text = blockNumber + transaction + previousHash + nonce;
+            String newHash = sha256(text);
+            if(newHash.startsWith("00", 0)){
+                fin.append(newHash);
+                System.out.println(newHash);
+            }
+            System.out.println(nonce);
+            continue;
+        }
+        return fin;
+    }
 }
